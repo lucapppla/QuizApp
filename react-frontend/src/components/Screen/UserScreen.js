@@ -27,7 +27,7 @@ export default class UserScreen extends React.Component {
     startQuiz = (item) => {
         if (this.validateInput()) {
             return this.props.navigation.navigate("TestStart", {
-                entryId: item.item,
+                item: item.item,
                 name: this.state.name,
                 surname: this.state.surname
             })
@@ -35,7 +35,8 @@ export default class UserScreen extends React.Component {
     }
 
     render() {
-        const item = this.props.navigation.state.params.entryId; //nome del file json
+        const item = this.props.navigation.state.params.item;
+        
         return (
             <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                 <Text>Inizia quiz</Text>
@@ -52,7 +53,7 @@ export default class UserScreen extends React.Component {
                 />
                 <Button
                     title="Start"
-                    onPress={() => this.startQuiz(item)}
+                    onPress={() => {this.startQuiz(item), navigation = this.props.navigation} }
                 />
             </View>
         );

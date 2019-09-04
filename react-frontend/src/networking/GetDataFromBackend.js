@@ -47,7 +47,7 @@ export class GetDataListFromBackend extends React.Component {
                         <Button
                             title={item}
                             type="outline"
-                            onPress={() => this.props.navigation.navigate("StartQuiz", { entryId: { item } })}>
+                            onPress={() => this.props.navigation.navigate("StartQuiz", { item: { item } })}>
                         </Button>
                     }>
                 </FlatList>
@@ -70,7 +70,7 @@ export class GetDataJsonFromBackend extends React.Component {
 
     makeGetRequestToBackEnd() {
         const QuizName = this.props.item;
-        
+
         axios.get('http://localhost:3000/list/jsonContent/', {
             params: {
                 title: QuizName
@@ -115,7 +115,6 @@ export class GetDataJsonFromBackend extends React.Component {
                     keyExtractor={(index) => index.toString()}
                     renderItem={({ item }) => { item }}
                     >
-                    <Text>SUCA</Text>
                 <Button
                     title={dataMap}
                     type="outline"
@@ -141,14 +140,6 @@ export class GetDataJsonFromBackend extends React.Component {
         }
     }
 
-    returnQuestion() {
-        return (this.state.question)
-    }
-
-    returnAnswer() {
-        return (this.state.answer)
-    }
-
     componentDidMount() {
         this.makeGetRequestToBackEnd();
     }
@@ -160,7 +151,7 @@ export class GetDataJsonFromBackend extends React.Component {
                 justifyContent: 'center',
                 alignItems: 'stretch',
             }}>
-                <Text> TESTO {this.returnQuestion()}</Text>
+                <Text> TESTO getdata </Text>
                 
             </View>
         );
