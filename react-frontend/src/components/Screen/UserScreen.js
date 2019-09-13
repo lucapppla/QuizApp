@@ -25,9 +25,10 @@ export default class UserScreen extends React.Component {
     }
 
     startQuiz = (item) => {
+
         if (this.validateInput()) {
-            return this.props.navigation.navigate("TestStart", {
-                item: item.item,
+            return this.props.navigation.navigate("AnswerScreen", {
+                item: item,
                 name: this.state.name,
                 surname: this.state.surname
             })
@@ -35,7 +36,8 @@ export default class UserScreen extends React.Component {
     }
 
     render() {
-        const item = this.props.navigation.state.params.item;
+        const { navigation } = this.props;
+        const item = navigation.getParam('item');
         
         return (
             <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -53,7 +55,7 @@ export default class UserScreen extends React.Component {
                 />
                 <Button
                     title="Start"
-                    onPress={() => {this.startQuiz(item), navigation = this.props.navigation} }
+                    onPress={() => {this.startQuiz(item)} }
                 />
             </View>
         );

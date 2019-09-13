@@ -3,12 +3,13 @@ import {
   createAppContainer,
   createBottomTabNavigator,
   createStackNavigator,
-} from "react-navigation"; // Version can be specified in package.json
+} from "react-navigation";
 
-import QuizListScreen from "./src/components/Screen/HomeScreen";
-import StartQuiz from "./src/components/Screen/UserScreen";
+import QuizListScreen from "./src/components/Screen/QuizListScreen";
+import UserScreen from "./src/components/Screen/UserScreen";
 import StaticsListScreen from "./src/components/Screen/StaticsScreen";
-import TestStart from "./src/components/Screen/TestStart";
+import {AnswerScreen} from "./src/components/Screen/AnswerScreen";
+import StatsAfterAnswerScreen from "./src/components/Screen/StatsAfterAnswerScreen";
 
 const HomeStack = createStackNavigator({
   QuizList: { 
@@ -24,8 +25,9 @@ const HomeStack = createStackNavigator({
       }
     }
   },
-  StartQuiz: { screen: StartQuiz },
-  TestStart: { screen : TestStart },
+  UserScreen: { screen: UserScreen },
+  AnswerScreen: {screen: AnswerScreen},
+  StatsAfterAnswerScreen: {screen: StatsAfterAnswerScreen}
 
 });
 
@@ -43,7 +45,6 @@ const StaticsStack = createStackNavigator({
       }
     }
   },
-  StartQuiz: { screen: StartQuiz }
 });
 
 export default createAppContainer(
