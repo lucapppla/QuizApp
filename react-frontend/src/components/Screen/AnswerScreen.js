@@ -6,11 +6,6 @@ import CountDown from "react-native-countdown-component";
 
 export class AnswerScreen extends React.Component {
 
-    data = [];
-    indexQuestion = 0;
-    lenghtQuestions = 0;
-    givenAnswerArray = [];
-
     makeGetRequestToBackEnd() {
         const { navigation } = this.props;
         const QuizName = navigation.getParam('item');
@@ -39,7 +34,6 @@ export class AnswerScreen extends React.Component {
         this.state = {
             dataResult: [],
             title: null,
-            response: false,
             indexQuestion: 0,
             lenghtQuestions: 0,
             givenAnswerArray: [],
@@ -75,7 +69,7 @@ export class AnswerScreen extends React.Component {
         givenAnswArray.push(answerGivenPoint);
         
         if(indexQuestion == this.state.lenghtQuestions - 1){
-            this.props.navigation.navigate("StatsAfterAnswerScreen");
+            this.props.navigation.navigate("StatsAfterAnswerScreen", {title: this.state.title, point: givenAnswArray});
         }else{
             indexQuestion = indexQuestion + 1;
         }

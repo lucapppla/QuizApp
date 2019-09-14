@@ -26,8 +26,18 @@ const HomeStack = createStackNavigator({
     }
   },
   UserScreen: { screen: UserScreen },
-  AnswerScreen: {screen: AnswerScreen},
-  StatsAfterAnswerScreen: {screen: StatsAfterAnswerScreen}
+  AnswerScreen: {
+    screen: AnswerScreen,
+    navigationOptions: {
+      headerLeft: null
+    }
+  },
+  StatsAfterAnswerScreen: {
+    screen: StatsAfterAnswerScreen,
+    navigationOptions: {
+      headerLeft: null
+    }
+  }
 
 });
 
