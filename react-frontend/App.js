@@ -29,6 +29,7 @@ const HomeStack = createStackNavigator({
   AnswerScreen: {
     screen: AnswerScreen,
     navigationOptions: {
+      header: null,
       headerLeft: null
     }
   },
@@ -56,6 +57,23 @@ const StaticsStack = createStackNavigator({
     }
   },
 });
+
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible;
+  if (navigation.state.routes.length > 1) {
+    navigation.state.routes.map(route => {
+      if (route.routeName === "AnswerScreen") {
+        tabBarVisible = false;
+      } else {
+        tabBarVisible = true;
+      }
+    });
+  }
+
+  return {
+    tabBarVisible
+  };
+};
 
 export default createAppContainer(
   createBottomTabNavigator(
