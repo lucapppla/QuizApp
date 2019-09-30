@@ -10,23 +10,41 @@ export class AnswerScreen extends React.Component {
         const { navigation } = this.props;
         const QuizName = navigation.getParam('item');
 
-        axios
-            .get("http://localhost:3000/list/jsonContent/", {
-                params: {
-                    title: QuizName
-                }
+        axios.get("http://localhost:3000/list/jsonContent/", {
+            params: {
+                title: QuizName
+            }
+        })
+        .then(response => {
+            const lenghtQuestions = response.data.array.length;
+            this.setState({
+                title: QuizName,
+                dataResult: response.data.array,
+                lenghtQuestions: lenghtQuestions
             })
-            .then(response => {
-                const lenghtQuestions = response.data.array.length;
-                this.setState({
-                    title: QuizName,
-                    dataResult: response.data.array,
-                    lenghtQuestions: lenghtQuestions
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
+    saveJsonToBackEnd(){
+        const { navigation } = this.props;
+        const QuizName = navigation.getParam('item');
+        const name = navigation.getParam('name');
+        const surname = navigation.getParam('surname');
+
+        axios.post("http://localhost:3000/createJson/", {
+            params:{
+                "name": name,
+                "surname": surname,
+                "testName": QuizName,
+                "array": this.state.givenAnswerArray,
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
 
     constructor() {
@@ -42,7 +60,7 @@ export class AnswerScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.makeGetRequestToBackEnd();
+        this.makeGetRequestToBackEnd()
     }
 
     showAnswer(){
@@ -69,7 +87,8 @@ export class AnswerScreen extends React.Component {
         givenAnswArray.push(answerGivenPoint);
         
         if(indexQuestion == this.state.lenghtQuestions - 1){
-            this.props.navigation.navigate("StatsAfterAnswerScreen", {title: this.state.title, point: givenAnswArray});
+            this.props.navigation.navigate("StatsAfterAnswerScreen", {title: this.state.title, point: givenAnswArray}),
+            this.saveJsonToBackEnd();
         }else{
             indexQuestion = indexQuestion + 1;
         }
@@ -80,7 +99,7 @@ export class AnswerScreen extends React.Component {
         })
         
     }
-
+    
     render() {
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "stretch" }}>

@@ -3,11 +3,13 @@ const app = express();
 const cors = require('cors');
 const SurveyList = require ('./routes/GetAllSurvey');
 const SurveyJsonContent = require ('./routes/GetJsonContent');
+const CreateJsonFile = require ('./routes/CreateJsonFile');
 const bodyParser = require ('body-parser');
 
 app.use(bodyParser.json());
 app.use(SurveyList);
 app.use(SurveyJsonContent);
+app.use(CreateJsonFile);
 
 app.use(cors());
 

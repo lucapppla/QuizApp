@@ -35,13 +35,7 @@ export class GetDataListFromBackend extends React.Component {
 
     render() {
         return (
-            <View
-                tyle={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "stretch"
-                }}
-            >
+            <View>
                 <FlatList
                     data={this.returnList()}
                     keyExtractor={index => index.toString()}
