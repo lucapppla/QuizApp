@@ -13,7 +13,7 @@ app.use(CreateJsonFile);
 
 app.use(cors());
 
-app.listen(3000, function () {
+app.listen(3000 || "151.97.114.35", function () {
   console.log('Server listen to the port -> 3000');
 });
 

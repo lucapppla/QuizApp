@@ -14,7 +14,7 @@ export class GetDataListFromBackend extends React.Component {
 
     makeGetRequestToBackEnd() {
         axios
-            .get("http://localhost:3000/list")
+            .get("http://151.97.114.35:3000/list" )
             .then(response => {
                 this.setState({ quiz: response.data });
             })

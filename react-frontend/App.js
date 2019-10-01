@@ -29,6 +29,7 @@ const HomeStack = createStackNavigator({
   AnswerScreen: {
     screen: AnswerScreen,
     navigationOptions: {
+      gesturesEnabled: false,
       header: null,
       headerLeft: null
     }
@@ -36,6 +37,7 @@ const HomeStack = createStackNavigator({
   StatsAfterAnswerScreen: {
     screen: StatsAfterAnswerScreen,
     navigationOptions: {
+      gesturesEnabled: false,
       headerLeft: null
     }
   }
@@ -43,10 +45,10 @@ const HomeStack = createStackNavigator({
 });
 
 const StaticsStack = createStackNavigator({
-  Statics: { 
+  Statistiche: { 
     screen: StaticsListScreen,
     navigationOptions: { 
-      title: 'Statics',
+      title: 'Statistiche',
       headerStyle: {
         backgroundColor: '#f4511e',
       },
@@ -79,10 +81,10 @@ export default createAppContainer(
   createBottomTabNavigator(
     {
       Quiz: HomeStack,
-      Statics: StaticsStack
+      Statistiche: StaticsStack
     },
     {
       initialRouteName: "Quiz",
     }
-  ),
+  )
 );
