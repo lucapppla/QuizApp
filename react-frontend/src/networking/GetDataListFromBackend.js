@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Button, Text } from "react-native-elements";
-import { View, FlatList, ListItem } from "react-native";
+import React from "react";
+import { Card, Button, Icon } from 'react-native-elements';
+import { FlatList, ScrollView, StyleSheet } from "react-native";
 import axios from "axios";
 
 export class GetDataListFromBackend extends React.Component {
@@ -14,7 +14,7 @@ export class GetDataListFromBackend extends React.Component {
 
     makeGetRequestToBackEnd() {
         axios
-            .get("http://151.97.114.35:3000/list" )
+            .get("http://localhost:3000/list" )
             .then(response => {
                 this.setState({ quiz: response.data });
             })
@@ -35,19 +35,47 @@ export class GetDataListFromBackend extends React.Component {
 
     render() {
         return (
-            <View>
+            <ScrollView style={styles.scrollView}>
                 <FlatList
                     data={this.returnList()}
                     keyExtractor={index => index.toString()}
                     renderItem={({ item }) => (
-                        <Button
+                        <Card
+                            containerStyle={styles.card}
+                            dividerStyle={styles.cardDivider}
                             title={item}
-                            type="outline"
+                        >
+                        <Button
+                            title="Vai al test"
+                            icon={<Icon class="material-icons" name='play-arrow' color='#ffffff' />}
+                            buttonStyle={styles.button}
                             onPress={() => this.props.navigation.navigate( 'UserScreen', { item: item })}
-                        ></Button>
+                        />
+                        </Card>
                     )}
                 ></FlatList>
-            </View>
+            </ScrollView>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    scrollView: {
+      marginBottom: 15
+    },
+    text: {
+      fontSize: 42,
+    },
+    card:{
+        borderRadius:10
+    },
+    cardDivider:{
+        display: "none"
+    },
+    button:{
+        borderRadius: 10, 
+        marginLeft: 60,
+        marginRight: 60, 
+        marginBottom: 0
+    }
+});

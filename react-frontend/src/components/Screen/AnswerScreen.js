@@ -10,7 +10,7 @@ export class AnswerScreen extends React.Component {
         const { navigation } = this.props;
         const QuizName = navigation.getParam('item');
 
-        axios.get("http://151.97.114.35:3000/list/jsonContent/" , {
+        axios.get("http://localhost:3000/list/jsonContent/" , {
             params: {
                 title: QuizName
             }
@@ -34,12 +34,28 @@ export class AnswerScreen extends React.Component {
         const name = navigation.getParam('name');
         const surname = navigation.getParam('surname');
 
-        axios.post("http://151.97.114.35:3000/createJson/", {
+        axios.post("http://localhost:3000/createJson/", {
             params:{
                 "name": name,
                 "surname": surname,
                 "testName": QuizName,
                 "array": this.state.givenAnswerArray,
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
+    saveUserToBackEnd(){
+        const { navigation } = this.props;
+        const name = navigation.getParam('name');
+        const surname = navigation.getParam('surname');
+
+        axios.post("http://localhost:3000/createUserJson/", {
+            params:{
+                "name": name,
+                "surname": surname
             }
         })
         .catch(error => {
@@ -89,7 +105,8 @@ export class AnswerScreen extends React.Component {
         
         if(indexQuestion == this.state.lenghtQuestions - 1){
             this.props.navigation.navigate("StatsAfterAnswerScreen", {title: this.state.title, point: givenAnswArray}),
-            this.saveJsonToBackEnd();
+            this.saveJsonToBackEnd(),
+            this.saveUserToBackEnd();
         }else{
             indexQuestion = indexQuestion + 1;
         }

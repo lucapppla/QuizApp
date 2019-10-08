@@ -41,7 +41,7 @@ export default class StatsAfterAnswerScreen extends React.Component {
         <Button
             title= 'Vai alle Statistiche'
             type="outline"
-            onPress={() => this.props.navigation.navigate('Statics')}
+            onPress={() => this.props.navigation.navigate('Statistiche')}
         ></Button>
       </View>
     );

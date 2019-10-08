@@ -1,21 +1,32 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { Button, Header} from 'react-native-elements';
+import { Overlay } from 'react-native-elements';
 import { GetDataListFromBackend } from "../../networking/GetDataListFromBackend";
 
 export default class QuizListScreen extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      isVisible: true
+    };
+  }
 
   render() {
     return (
       <View
         style={{ flex: 1, justifyContent: "center", alignItems: "stretch" }}
       >
-        <Text>Scegli il test che vuoi fare </Text>
+        <Overlay 
+          height= {100}
+          isVisible={this.state.isVisible} 
+          onBackdropPress={() => this.setState({ isVisible: false })}
+        >
+          <Text>Benvenuto su Quiz-App !</Text>
+        </Overlay>  
+
         <GetDataListFromBackend navigation={this.props.navigation}/>
-        <Button
-          title="Vai alla pagina delle statistiche"
-          onPress={() => this.props.navigation.navigate("Statics")}
-        />
       </View>
     );
   }

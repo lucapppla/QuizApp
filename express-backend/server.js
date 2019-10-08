@@ -4,16 +4,18 @@ const cors = require('cors');
 const SurveyList = require ('./routes/GetAllSurvey');
 const SurveyJsonContent = require ('./routes/GetJsonContent');
 const CreateJsonFile = require ('./routes/CreateJsonFile');
+const createUserJson = require ('./routes/SaveUser');
 const bodyParser = require ('body-parser');
 
 app.use(bodyParser.json());
 app.use(SurveyList);
 app.use(SurveyJsonContent);
+app.use(createUserJson);
 app.use(CreateJsonFile);
 
 app.use(cors());
 
-app.listen(3000 || "151.97.114.35", function () {
+app.listen(3000, function () {
   console.log('Server listen to the port -> 3000');
 });
 

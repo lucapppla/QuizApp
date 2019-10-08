@@ -7,9 +7,14 @@ import {
 
 import QuizListScreen from "./src/components/Screen/QuizListScreen";
 import UserScreen from "./src/components/Screen/UserScreen";
-import StaticsListScreen from "./src/components/Screen/StaticsScreen";
 import {AnswerScreen} from "./src/components/Screen/AnswerScreen";
 import StatsAfterAnswerScreen from "./src/components/Screen/StatsAfterAnswerScreen";
+
+import StaticsListScreen from "./src/components/Screen/StaticsScreen";
+import NumberUsers from "./src/components/Screen/NumberUsers";
+import PercentCorrectAnswer from "./src/components/Screen/PercentCorrectAnswer";
+import PercentCorrectAnswerForUser from "./src/components/Screen/PercentCorrectAnswerForUser";
+import AverageScore from "./src/components/Screen/AverageScore";
 
 const HomeStack = createStackNavigator({
   QuizList: { 
@@ -58,6 +63,54 @@ const StaticsStack = createStackNavigator({
       }
     }
   },
+  NumberUsers: {
+    screen: NumberUsers,
+    navigationOptions: { 
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      }
+    }
+  },
+  PercentCorrectAnswer: {
+    screen: PercentCorrectAnswer,
+    navigationOptions: { 
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      }
+    }
+  },
+  PercentCorrectAnswerForUser: {
+    screen: PercentCorrectAnswerForUser,
+    navigationOptions: { 
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      }
+    }
+  },
+  AverageScore:{
+    screen: AverageScore,
+    navigationOptions: { 
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      }
+    }
+  }
 });
 
 HomeStack.navigationOptions = ({ navigation }) => {
