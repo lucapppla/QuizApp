@@ -29,7 +29,7 @@ router.post("/createJson", (req, res) => {
     obj.data.push(
         {"surname" : surname}, 
         {"name": name}, 
-        {"data": data},
+        {"date": data},
         {"hour": hour}, 
         {"testName": testName}, 
         {"array": pointForAnswer}, 

@@ -4,27 +4,15 @@ const glob = require("glob");
 const fs = require("fs");
 const path = require("path");
 
-router.get("/list/jsonContent", (req, res ) => {
-
-    if(!req.body){
-        return res.status(400).send('Body is missing');
-    }
-    glob("survey/*.json", function(err, filesInDir) {
+router.get("/userData", (req, res) => {
+    glob("storage/user/*.json", function(err, filesInDir) {
         
+        console.log(filesInDir)
         if(err){
             res.status(400).end("An error occurred, cannot read the folder", err);
         }
 
-        for(var element in filesInDir){
-            var quiz;
-            var replace = String(filesInDir[element]).replace('survey/', '');
-
-            if(replace == req.query.title) {
-                quiz = replace;
-            }
-        }
-
-        fs.readFile( path.join( process.cwd(), '/survey', quiz) , 'utf8', function (err, data) {
+        fs.readFile( String(filesInDir), 'utf8', function (err, data) {
             if(err) {
               res.status(400).send("cannot read the file, something goes wrong with the file", err);
             }
@@ -39,4 +27,3 @@ router.get("/list/jsonContent", (req, res ) => {
 });
 
 module.exports = router;
-
