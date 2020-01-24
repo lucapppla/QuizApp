@@ -3,12 +3,12 @@
 LUCA PETRALIA X81/000092
 
 ## Introduction
-Progetto universitario per la materia LAP 2 (laboratorio avanzato di programmazione 2).
+University project for LAP 2 (advanced programming laboratory 2).
 
-Viene realizzata una applicazione cross-platform in grado di estrapolare e mostrare i risultati riportati da diversi utenti in test sostenuti con telefonino. 
-Sia il questionario che le risposte sono memorizzati sotto forma di file Json.
+A cross-platform application is created that is able to extrapolate and show the results reported by different users in tests taken with a mobile phone.
+Both the questionnaire and the answers are stored in the form of a Json file.
 
-Viene aggiunto un servizio back-end, con Node.JS e il framework ( Express.JS ), per il ritorno dei dati composto dalle domande e dalle risposte dei Quiz all'interno dei file Json in cui è previsto il salvataggio dell'utente che svolge il quiz e il salvataggio dei vari risultati ottenuti, così che, tramite il menù "statistiche", si avrà la possibilità di accedere ai diversi dati statistici riguardanti i suoi progressi e degli altri utenti.
+A back-end service is added, with Node.JS and the framework (Express.JS), for the return of the data consisting of the questions and answers of the Quiz inside the Json files in which the user is expected to be saved. performs the quiz and saves the various results obtained, so that, through the "statistics" menu, you will have the opportunity to access the various statistical data concerning your progress and other users.
 
 ### Installation
 
@@ -22,40 +22,16 @@ npm install
 Open two different terminal and in the first go to :
 
 ```
-Percorso front end
+pathOfGitClone/react-frontend/
 ```
 
 in the second go to :
 
 ```
-percorso back end
+pathOfGitClone/express-backend/
 ```
 
 Now start your Android/IOS simulator in the terminal, with `i` for IOS or `a` for Android simulator, where react-native-front-end was started
-
-You can see, in the simulator, this screen :
-
-immagine----
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Built With
 
