@@ -31,7 +31,7 @@ in the second go to :
 pathOfGitClone/express-backend/
 ```
 
-Now start your Android/IOS simulator in the terminal, with `i` for IOS or `a` for Android simulator, where react-native-front-end was started
+Now start your Android/IOS simulator in the react-native terminal, with `i` for IOS or `a` for Android simulator, where react-native-front-end was started
 
 ## Built With
 
