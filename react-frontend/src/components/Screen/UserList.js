@@ -3,8 +3,8 @@ import { Card, Button, Icon } from 'react-native-elements';
 import { FlatList, ScrollView, StyleSheet, Dimensions } from "react-native";
 import axios from "axios";
 
-//send a get request to back-end for retrive the list of all test
-export class GetDataListFromBackend extends React.Component {
+//show the user list to show the test carried out
+export default class UserList extends React.Component {
     constructor() {
         super();
 
@@ -14,12 +14,16 @@ export class GetDataListFromBackend extends React.Component {
     }
 
     makeGetRequestToBackEnd() {
-        axios.get("http://localhost:3000/list" ).then(response => {
-                this.setState({ quiz: response.data });
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        const { navigation } = this.props;
+        const item = navigation.getParam('item');
+        const replace = String(item).replace('.json', '');
+
+        axios.get("http://localhost:3000/UserList", {params : { item: replace}}).then(response => {
+            this.setState({ quiz: response.data });
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
 
     returnList() {
@@ -37,30 +41,23 @@ export class GetDataListFromBackend extends React.Component {
 
         return (
             <ScrollView style={styles.scrollView}>
-                <Card
-                    title={'Benvenuto su QuizApp, inzia da qui ed effettua il tuo primo quiz'}
-                    titleStyle={ styles.titleStyleWelcomeCard }
-                    image={require('../images/icon.png')}
-                    imageStyle={ styles.imageStyleWelcomeCard }
-                    containerStyle={ styles.containerWelcomeCard }
-                    dividerStyle={styles.cardDivider}
-                />
                 <FlatList
                     data={this.returnList()}
                     keyExtractor={index => index.toString()}
                     numColumns= {numColumns}
-                    renderItem={({ item }) => (
+                    renderItem={({ item }) => 
+                    (
                         <Card
-                            title={String(item).replace('.json', '')}
+                            title={String(item).replace(RegExp(/(_\d).*$/), '')}
                             titleStyle={ styles.quizTitleCardStyle }
                             containerStyle={styles.card}
                             dividerStyle={styles.cardDivider}
                         >
                         <Button
-                            title="Vai al test"
+                            title="Esito Test"
                             icon={<Icon class="material-icons" name='play-arrow' color='#ffffff' />}
                             buttonStyle={styles.button}
-                            onPress={() => this.props.navigation.navigate( 'UserScreen', { item: item })}
+                            onPress={() => this.props.navigation.navigate( 'ReadJsonContent', { item: item })}
                         />
                         </Card>
                     )}
@@ -73,24 +70,6 @@ export class GetDataListFromBackend extends React.Component {
 const styles = StyleSheet.create({
     scrollView: {
         alignContent: 'center'
-    },
-    titleStyleWelcomeCard: {
-        color: '#ffff', 
-        alignSelf:'center', 
-        position:'absolute', 
-        marginTop: 155
-    },
-    imageStyleWelcomeCard: {
-        alignSelf:'center', 
-        width: 160, 
-        height: 160
-    },
-    containerWelcomeCard: {
-        backgroundColor: '#00A8E8',
-        borderRadius: 10,
-        width: ( Dimensions.get('screen').width -28), 
-        height: 220,
-        marginBottom: 20
     },
     card:{
         margin: 4,
@@ -108,6 +87,6 @@ const styles = StyleSheet.create({
     button:{
         backgroundColor: '#007EA7',
         borderRadius: 10, 
-        marginTop: 20
+        marginTop: 30
     }
 });

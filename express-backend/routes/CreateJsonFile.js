@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require("fs");
 
 var obj = {
-    data: []
+    data: {}
 };
 
 router.post("/createJson", (req, res) => {
@@ -26,15 +26,15 @@ router.post("/createJson", (req, res) => {
     pointForAnswer = getPointForAnswer(array);
 
     //pushing all the data in the array obj for create the JSON file
-    obj.data.push(
-        {"surname" : surname}, 
-        {"name": name}, 
-        {"data": data},
-        {"hour": hour}, 
-        {"testName": testName}, 
-        {"array": pointForAnswer}, 
-        {"point": totalPoint}
-    );
+    obj.data = {
+        "surname": surname, 
+        "name": name, 
+        "date": data,
+        "hour": hour, 
+        "testName": testName, 
+        "array": pointForAnswer, 
+        "point": totalPoint
+    };
     
     var finalJson = JSON.stringify(obj);
     JsonName = createJsonName(name, surname, testName);
@@ -42,13 +42,14 @@ router.post("/createJson", (req, res) => {
     fs.writeFile( (__dirname + '/../storage/'+JsonName), finalJson, 'utf8', function (err) {
         if (err) throw err;               
         console.log('JSON created');
-      }); 
+    }); 
 
-      res.status(200).send("JSON created").end();   
+    res.status(200).send("JSON created").end();   
 });
 
+//function that inserts in an array the quiz point
 function getPointForAnswer(array){
-    newArray = []
+    newArray = [];
     array.map( elem =>{
         if(elem.givenAnswer ==  elem.rightAnswer)
             newArray.push( {"givenAnswer" : elem.givenAnswer, "point": "1"} );
@@ -63,36 +64,32 @@ function totalPoint(answerList){
 };
 
 function createJsonName (name, surname, testCode){
-    return String(name+"_"+surname+"_"+testCode);
+    return String(name.toLowerCase()+"_"+surname.toLowerCase()+"_"+testCode);
 };
 
 function getDate() {
 
     var date = new Date();
-
     var year = date.getFullYear();
-
     var month = date.getMonth() + 1;
-    month = (month < 10 ? "0" : "") + month;
-
     var day  = date.getDate();
+
+    month = (month < 10 ? "0" : "") + month;
     day = (day < 10 ? "0" : "") + day;
 
-    return day + ":" + month + ":" + year;
+    return day + "/" + month + "/" + year;
 
 };
 
 function getHour() {
 
     var date = new Date();
-
     var hour = date.getHours();
-    hour = (hour < 10 ? "0" : "") + hour;
-
     var min  = date.getMinutes();
-    min = (min < 10 ? "0" : "") + min;
-
     var sec  = date.getSeconds();
+
+    hour = (hour < 10 ? "0" : "") + hour;
+    min = (min < 10 ? "0" : "") + min;
     sec = (sec < 10 ? "0" : "") + sec;
 
     return hour + ":" + min + ":" + sec;

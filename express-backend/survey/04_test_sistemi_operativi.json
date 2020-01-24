@@ -1,0 +1,28 @@
+{
+  "array": [
+    {
+      "Domanda": "DOAMNDA N. 1",
+      "A": "Risposta A",
+      "B": "Risposta B",
+      "C": "Risposta C",
+      "D": "Risposta D",
+      "Esatta": "A"
+    },
+    {
+      "Domanda": "DOAMNDA N. 2",
+      "A": "Risposta A",
+      "B": "Risposta B",
+      "C": "Risposta C",
+      "D": "Risposta D",
+      "Esatta": "A"
+    },
+    {
+      "Domanda": "DOAMNDA N. 3",
+      "A": "Risposta A",
+      "B": "Risposta B",
+      "C": "Risposta C",
+      "D": "Risposta D",
+      "Esatta": "A"
+    }
+  ]
+}
