@@ -2,13 +2,15 @@ const express = require("express");
 const router = express.Router();
 const glob = require("glob");
 const fs = require("fs");
-const path = require("path");
 
+//this request returns the contents of a Json file which saves users who have carried out a specific test
 router.get("/userData", (req, res) => {
-    glob("storage/user/*.json", function(err, filesInDir) {
+    var item = req.query.item.toLowerCase();
+    var replace = item.replace('.json', '');
+
+    glob("storage/user/user_"+replace+".json", function(err, filesInDir) {
         
-        console.log(filesInDir)
-        if(err){
+        if(err) {
             res.status(400).end("An error occurred, cannot read the folder", err);
         }
 
@@ -18,7 +20,6 @@ router.get("/userData", (req, res) => {
             }
 
             var jsonContent = JSON.parse(data); 
-            console.log(jsonContent)
 
             res.status(200).send(jsonContent).end();   
         });    

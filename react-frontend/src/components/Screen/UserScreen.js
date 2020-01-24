@@ -1,8 +1,8 @@
 import React from "react";
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { View, Text, Button } from "react-native";
-import { Input } from "react-native-elements";
+import { View, StyleSheet } from "react-native";
+import { Input, Button, Card } from "react-native-elements";
 
+//display the card who permit to insert and sending the input to the component who elaborate this data
 export default class UserScreen extends React.Component {
     constructor() {
         super()
@@ -26,7 +26,6 @@ export default class UserScreen extends React.Component {
     }
 
     startQuiz = (item) => {
-
         if (this.validateInput()) {
             return this.props.navigation.navigate("AnswerScreen", {
                 item: item,
@@ -41,37 +40,63 @@ export default class UserScreen extends React.Component {
         const item = navigation.getParam('item');
         
         return (
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                <Text>Inserisci il tuo nome prima di cominciare</Text>
-                <Input
-                    placeholder='Nome'
-                    onChangeText={(name) => this.setState({ name })}
-                    shake={true}
-                    leftIcon={
-                        <Icon
-                        name='user'
-                        size={24}
-                        color='black'
-                        />
-                    }
+            <View style={styles.view}>
+                <Card 
+                    title='Inserisci il tuo nome prima di cominciare'
+                    titleStyle={ styles.titleStyleCard }
+                    containerStyle={styles.containerCard}
+                    dividerStyle={styles.cardDivider}
+                >
+                    <Input
+                        placeholder='Nome'
+                        onChangeText={(name) => this.setState({ name })}
+                        inputContainerStyle={styles.inputContainer}
+                        inputStyle={styles.input}
                     />
-                <Input
-                    placeholder='Cognome'
-                    onChangeText={(surname) => this.setState({ surname })}
-                    shake={true}
-                    leftIcon={
-                        <Icon
-                        name='user'
-                        size={24}
-                        color='black'
-                        />
-                    }
-                />
-                <Button
-                    title="Start"
-                    onPress={() => {this.startQuiz(item)} }
-                />
+                    <Input
+                        placeholder='Cognome'
+                        onChangeText={(surname) => this.setState({ surname })}
+                        inputContainerStyle={styles.inputContainer}
+                        inputStyle={styles.input}
+                    />
+                    <Button
+                        buttonStyle={styles.button}
+                        title="Start"
+                        onPress={() => {this.startQuiz(item)} }
+                    />
+                </Card>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    view: {
+        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center'
+    },
+    containerCard: {
+        backgroundColor: '#00A8E8',
+        borderRadius: 10,
+    },
+    inputContainer: {
+        borderColor: '#fff'
+    },
+    input: {
+        color:'#fff'
+    },
+    titleStyleCard: {
+        fontSize: 24,
+        color: '#ffff', 
+        alignSelf:'center'
+    },
+    cardDivider: {
+        backgroundColor: '#ffff'
+    },
+    button: {
+        backgroundColor: '#007EA7',
+        borderRadius: 10, 
+        marginTop: 20
+    }
+});

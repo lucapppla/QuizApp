@@ -1,77 +1,64 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import Constants from 'expo-constants';
+import { Text, StyleSheet, ScrollView } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 
-export default class StaticsListScreen extends React.Component {
+//shows the differents type of statistics you want to view
+export default class StaticsScreen extends React.Component {
   render() {
+    const { navigation } = this.props;
+    const item = navigation.getParam('item');
+    const replace = String(item).replace('.json', '');
+
     return (
-      <ScrollView style={styles.scrollView}>
+      <ScrollView>
         <Card
           title='Numero di utenti'
-          containerStyle={styles.card}
+          titleStyle={styles.titleStyleCard}
+          containerStyle={styles.containerCard}
           dividerStyle={styles.cardDivider}
-          //possibilità di mettere image={require('../images/pic2.jpg')}
         >
-          <Text style={{marginBottom: 10}}>
-            Visualizza le statistiche del numero di utenti che hanno effettuato un test
+          <Text style={styles.textInsideCardStyle}>
+            Visualizza le statistiche del numero di utenti che hanno effettuato il test {replace}
           </Text>
           <Button
-            icon={<Icon name='code' color='#ffffff' />}
+            icon={<Icon name='code' color='#ffffff'/>}
             buttonStyle={styles.button}
             title='Visualizza' 
-            onPress={() => this.props.navigation.navigate('NumberUsers')}
+            onPress={() => this.props.navigation.navigate('NumberUsers', {item: item})}
           />
         </Card>
 
         <Card
           title='Percentuale di risposte esatte'
-          containerStyle={styles.card}
+          titleStyle={styles.titleStyleCard}
+          containerStyle={styles.containerCard}
           dividerStyle={styles.cardDivider}
-          //possibilità di mettere image={require('../images/pic2.jpg')}
         >
-          <Text style={{marginBottom: 10}}>
-            Visualizza la percentuale delle risposte complessivamente esatte
+          <Text style={styles.textInsideCardStyle}>
+            Visualizza la percentuale delle risposte complessivamente esatte del test {replace}
           </Text>
           <Button
-            icon={<Icon name='code' color='#ffffff' />}
+            icon={<Icon name='code' color='#ffffff'/>}
             buttonStyle={styles.button}              
             title='Visualizza' 
-            onPress={() => this.props.navigation.navigate('PercentCorrectAnswer')}
+            onPress={() => this.props.navigation.navigate('PercentCorrectAnswer', {item: item})}
           />
         </Card>
 
         <Card
-          title='Percentuale di risposte esatte per utente'
-          containerStyle={styles.card}
+          title='Risposte esatte utente'
+          titleStyle={styles.titleStyleCard}
+          containerStyle={styles.containerCard}
           dividerStyle={styles.cardDivider}
-          //possibilità di mettere image={require('../images/pic2.jpg')}
         >
-          <Text style={{marginBottom: 10}}>
-            Visualizza la percentuale delle risposte per ogni utente che ha effettuato almeno un test
+          <Text style={styles.textInsideCardStyle}>
+            Visualizza le risposte esatte e la percentuale degli utenti che hanno svolto il test {replace}
           </Text>
           <Button
-            icon={<Icon name='code' color='#ffffff' />}
+            icon={<Icon name='code' color='#ffffff'/>}
             buttonStyle={styles.button}              
             title='Visualizza'
-            onPress={() => this.props.navigation.navigate('PercentCorrectAnswerForUser')}
-          />
-        </Card>
-
-        <Card
-          title='Punteggio medio utente'
-          containerStyle={styles.card}
-          dividerStyle={styles.cardDivider}
-          //possibilità di mettere image={require('../images/pic2.jpg')}
-        >
-          <Text style={{marginBottom: 10}}>
-            Visualizza il punteggio medio per ogni utente che ha effettuato almeno un test
-          </Text>
-          <Button
-            icon={<Icon name='code' color='#ffffff' />}
-            buttonStyle={styles.button}              
-            title='Visualizza' 
-            onPress={() => this.props.navigation.navigate('AverageScore')}
+            onPress={() => this.props.navigation.navigate('UserList', {item: item})}
           />
         </Card>
       </ScrollView>
@@ -80,20 +67,26 @@ export default class StaticsListScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-
-  scrollView: {
-    marginBottom: 15
+  containerCard: {
+    backgroundColor: '#00A8E8',
+    borderRadius: 10
   },
-  text: {
-    fontSize: 42,
+  titleStyleCard:{
+    fontSize: 24,
+    color: '#ffff', 
+    alignSelf:'center'
   },
-  card:{
-    borderRadius:10
+  textInsideCardStyle: {
+    color: '#ffff',
+    fontSize: 18,
+    marginBottom: 10,
+    textAlign: 'center'
   },
   cardDivider:{
-      display: "none"
+    backgroundColor: '#ffff'
   },
   button:{
+      backgroundColor: '#007EA7',
       borderRadius: 10, 
       marginLeft: 60,
       marginRight: 60, 

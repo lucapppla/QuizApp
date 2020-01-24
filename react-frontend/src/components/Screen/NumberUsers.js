@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, Dimensions } from 'react-native';
-import {
-  LineChart,
-} from "react-native-chart-kit";
+import { LineChart } from "react-native-chart-kit";
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import axios from "axios";
 
+//show a graphic of the users who made the test in a certain period, with the component chart-kit 
 export default class NumerUsers extends React.Component {
   constructor() {
     super();
@@ -17,12 +16,15 @@ export default class NumerUsers extends React.Component {
         { key: 'second', title: 'Mese' },
         { key: 'third', title: 'Anno' },
       ],
-      data: [],
+      data: []
     };
   }
-
+  
   makeGetRequestToBackEnd() {
-    axios.get("http://localhost:3000/userData/").then(response => {
+    const { navigation } = this.props;
+    const item = navigation.getParam('item');
+
+    axios.get("http://localhost:3000/userData/", { params : { item : item }}).then(response => {
       this.setState({
         data: response.data.data
       });
@@ -59,13 +61,11 @@ export default class NumerUsers extends React.Component {
           dataDay.datasets.forEach((elementData) => {
             elementData.data[1] = elementData.data[1] + 1
           });
-        }
-        else if (subStr >= 15 && subStr <= 21) {
+        } else if (subStr >= 15 && subStr <= 21) {
           dataDay.datasets.forEach((elementData) => {
             elementData.data[2] = elementData.data[2] + 1
           });
-        }
-        else if (subStr >= 22 && subStr <= 31) {
+        } else if (subStr >= 22 && subStr <= 31) {
           dataDay.datasets.forEach((elementData) => {
             elementData.data[3] = elementData.data[3] + 1
           });
@@ -107,7 +107,6 @@ export default class NumerUsers extends React.Component {
     if (this.state.data && this.state.data.length != 0) {
 
       const obj = this.state.data;
-
       const dataYear = {
         labels: [2019, 2020, 2021, 2022],
         datasets: [{
@@ -143,13 +142,10 @@ export default class NumerUsers extends React.Component {
         yAxisLabel={'n° '}
         chartConfig={{ 
           decimalPlaces: 0, 
-          backgroundColor: '#0091EA',
-          backgroundGradientFrom: '#0091EA',
+          backgroundColor: '#007EA7',
+          backgroundGradientFrom: '#007EA7',
           backgroundGradientTo: '#0091EA',
-          color: (opacity = 10) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            borderRadius: 16
-          }
+          color: (opacity = 10) => `rgba(255, 255, 255, ${opacity})`
         }}
       />
     )
@@ -159,7 +155,6 @@ export default class NumerUsers extends React.Component {
     const FirstRoute = () => (
       <View>{this.getDay()}</View>
     );
-    
     const SecondRoute = () => (
       <View>{this.getMonth()}</View>
     );
@@ -167,10 +162,16 @@ export default class NumerUsers extends React.Component {
       <View>{this.getYear()}</View>
     );
     
-    console.log("State", this.state)
     return (
       <TabView
         navigationState={this.state}
+        renderTabBar={ (props) =>
+          <TabBar
+            {...props}
+            indicatorStyle={{ display: 'none' }}
+            style={{ backgroundColor: '#007EA7' }}
+          />
+        }
         renderScene={SceneMap({
           first: FirstRoute,
           second: SecondRoute,
@@ -178,7 +179,7 @@ export default class NumerUsers extends React.Component {
         })}
         swipeEnabled={true}
         onIndexChange={index => this.setState({ index })}
-        initialLayout={{ width: Dimensions.get('window').width }}
+        initialLayout={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height }}
       />
     )
   }

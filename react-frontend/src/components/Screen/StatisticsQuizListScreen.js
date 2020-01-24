@@ -1,9 +1,8 @@
 import React from "react";
-import { View, StyleSheet} from "react-native";
-import { GetDataListFromBackend } from "../../networking/GetDataListFromBackend";
+import { View, StyleSheet } from "react-native";
+import { GetDataListStatistics } from "../../networking/GetDataListStatistics";
 
-//return the component who show the list of the test
-export default class QuizListScreen extends React.Component {
+export default class StatisticsQuizListScreen extends React.Component {
 
   constructor() {
     super();
@@ -16,7 +15,7 @@ export default class QuizListScreen extends React.Component {
   render() {
     return (
       <View style={styles.view}>
-        <GetDataListFromBackend navigation={this.props.navigation}/>
+        <GetDataListStatistics navigation={this.props.navigation}/>
       </View>
     );
   }

@@ -4,18 +4,18 @@ const glob = require("glob");
 const fs = require("fs");
 const path = require("path");
 
+//this request returns the content of a specific test
 router.get("/list/jsonContent", (req, res ) => {
-
-    if(!req.body){
+    if(!req.body) {
         return res.status(400).send('Body is missing');
     }
+
     glob("survey/*.json", function(err, filesInDir) {
-        
-        if(err){
+        if(err) {
             res.status(400).end("An error occurred, cannot read the folder", err);
         }
 
-        for(var element in filesInDir){
+        for(var element in filesInDir) {
             var quiz;
             var replace = String(filesInDir[element]).replace('survey/', '');
 
@@ -30,7 +30,6 @@ router.get("/list/jsonContent", (req, res ) => {
             }
 
             var jsonContent = JSON.parse(data); 
-            console.log(jsonContent)
 
             res.status(200).send(jsonContent).end();   
         });    
