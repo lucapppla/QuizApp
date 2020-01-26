@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Button, Icon } from 'react-native-elements';
 import { FlatList, ScrollView, StyleSheet, Dimensions } from "react-native";
 import axios from "axios";
+import Helper from "../../Helper/Helper"
 
 //show the user list to show the test carried out
 export default class UserList extends React.Component {
@@ -18,7 +19,7 @@ export default class UserList extends React.Component {
         const item = navigation.getParam('item');
         const replace = String(item).replace('.json', '');
 
-        axios.get("http://localhost:3000/UserList", {params : { item: replace}}).then(response => {
+        axios.get(Helper.getEndpoint("/UserList"), {params : { item: replace}}).then(response => {
             this.setState({ quiz: response.data });
         })
         .catch(error => {

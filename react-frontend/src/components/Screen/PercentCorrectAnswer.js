@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import { Card } from 'react-native-elements';
 import AnimateNumber from 'react-native-animate-number'
 import axios from "axios";
+import Helper from "../../Helper/Helper"
 
 //show a card with a specific percentage right answers 
 export default class PercentCorrectAnswer extends React.Component {
@@ -20,7 +21,7 @@ export default class PercentCorrectAnswer extends React.Component {
     const item = navigation.getParam('item');
     const replace = item.replace('.json', '');
 
-    axios.get("http://localhost:3000/GetFinishQuizData", { params : { item : replace }}).then( response => {
+    axios.get(Helper.getEndpoint("/GetFinishQuizData"), { params : { item : replace }}).then( response => {
       this.setState( { data : response.data, item : replace });
     }).catch(error => {
       console.log(error);

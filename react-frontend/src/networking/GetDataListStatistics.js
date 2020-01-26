@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Button, Icon } from 'react-native-elements';
 import { FlatList, ScrollView, StyleSheet, Dimensions } from "react-native";
 import axios from "axios";
+import Helper from "../Helper/Helper";
 
 //send a get request to back-end for retrive the list of all test for showing the statistics
 export class GetDataListStatistics extends React.Component {
@@ -14,7 +15,7 @@ export class GetDataListStatistics extends React.Component {
     }
 
     makeGetRequestToBackEnd() {
-        axios.get("http://localhost:3000/list" ).then(response => {
+        axios.get(Helper.getEndpoint("/list") ).then(response => {
             this.setState({ quiz: response.data });
         })
         .catch(error => {

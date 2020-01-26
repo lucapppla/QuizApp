@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions} from "react-native";
 import { Card, Button } from 'react-native-elements';
 import axios from "axios";
 import CountDown from "react-native-countdown-component";
-
+import Helper from "../../Helper/Helper"
 //show the questions and the answers and send all to back-end who save in a Json file
 export class AnswerScreen extends React.Component {
 
@@ -13,7 +13,7 @@ export class AnswerScreen extends React.Component {
         const name = navigation.getParam('name');
         const surname = navigation.getParam('surname');
 
-        axios.post("http://localhost:3000/createJson/", {
+        axios.post(Helper.getEndpoint("/createJson"), {
             params:{
                 "name": name,
                 "surname": surname,
@@ -32,7 +32,7 @@ export class AnswerScreen extends React.Component {
         const name = navigation.getParam('name');
         const surname = navigation.getParam('surname');
 
-        axios.post("http://localhost:3000/createUserJson/", {
+        axios.post(Helper.getEndpoint("/createUserJson"), {
             params:{
                 "QuizName": QuizName,
                 "name": name,
@@ -60,7 +60,7 @@ export class AnswerScreen extends React.Component {
         const { navigation } = this.props;
         const QuizName = navigation.getParam('item');
 
-        axios.get("http://localhost:3000/list/jsonContent/" , {
+        axios.get(Helper.getEndpoint("/list/jsonContent") , {
             params: {
                 title: QuizName
             }
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     exitButton: {
-        marginTop: 220
+        justifyContent: 'space-between'
     },
     visibleCountDown: {
         justifyContent: 'center',

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, FlatList, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { Card } from 'react-native-elements';
 import axios from "axios";
+import Helper from "../../Helper/Helper"
 
 //send a get request who read the content of the Json file of a specific user
 export default class ReadJsonContent extends React.Component {
@@ -67,7 +68,7 @@ export default class ReadJsonContent extends React.Component {
             dividerStyle={styles.cardDivider}
         >
         <Text h1 style={styles.textHighlight}>{point}</Text>
-        <ScrollView contentContainerStyle={{height: 350, marginTop: 10}}>
+        <ScrollView contentContainerStyle={{height: 180, marginTop: 10}}>
           <FlatList
             data={givenAnswer}
             keyExtractor={(item, index) => ""+index}
@@ -83,7 +84,7 @@ export default class ReadJsonContent extends React.Component {
     const { navigation } = this.props;
     const item = navigation.getParam('item');
 
-    axios.get("http://localhost:3000/ReadJsonContent", {params: { item: item}}).then(response => {
+    axios.get(Helper.getEndpoint("/ReadJsonContent"), {params: { item: item}}).then(response => {
       this.setState({ data: response.data.data });
     })
     .catch(error => {
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   containerCard: {
     backgroundColor: '#00A8E8',
     borderRadius: 10,
-    height: 550,
+    height: 450,
     width: ( Dimensions.get('screen').width -10 )
   },
   cardDivider: {

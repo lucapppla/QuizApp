@@ -1,7 +1,7 @@
 {
   "array": [
     {
-      "Domanda": "DOAMNDA N. 1",
+      "Domanda": "DOMANDA N. 1",
       "A": "Risposta A",
       "B": "Risposta B",
       "C": "Risposta C",
@@ -9,20 +9,20 @@
       "Esatta": "A"
     },
     {
-      "Domanda": "DOAMNDA N. 2",
+      "Domanda": "DOMANDA N. 2",
       "A": "Risposta A",
       "B": "Risposta B",
       "C": "Risposta C",
       "D": "Risposta D",
-      "Esatta": "A"
+      "Esatta": "B"
     },
     {
-      "Domanda": "DOAMNDA N. 3",
+      "Domanda": "DOMANDA N. 3",
       "A": "Risposta A",
       "B": "Risposta B",
       "C": "Risposta C",
       "D": "Risposta D",
-      "Esatta": "A"
+      "Esatta": "C"
     }
   ]
 }

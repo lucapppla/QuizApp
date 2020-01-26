@@ -34,7 +34,7 @@ export default class StatsAfterAnswerScreen extends React.Component {
           containerStyle={styles.containerCard}
           dividerStyle={styles.cardDivider}
         >
-        <ScrollView contentContainerStyle={{height: 350}}>
+        <ScrollView contentContainerStyle={{height: 200}}>
           <FlatList
             data={point}
             keyExtractor={(item, index) => ""+index}
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
   containerCard: {
       backgroundColor: '#00A8E8',
       borderRadius: 10,
-      height: 550,
-      width: ( Dimensions.get('screen').width -10 )
+      height: Dimensions.get('screen').width -10,
+      width: Dimensions.get('screen').width -10
   },
   cardDivider: {
     display: 'none'
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   textStyleTitleCard: {
-    fontSize: 30,
+    fontSize: 20,
     color: '#ffff', 
     textAlign: 'center',
     marginBottom: 20,

@@ -3,6 +3,7 @@ import { View, Dimensions } from 'react-native';
 import { LineChart } from "react-native-chart-kit";
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import axios from "axios";
+import Helper from "../../Helper/Helper"
 
 //show a graphic of the users who made the test in a certain period, with the component chart-kit 
 export default class NumerUsers extends React.Component {
@@ -24,7 +25,7 @@ export default class NumerUsers extends React.Component {
     const { navigation } = this.props;
     const item = navigation.getParam('item');
 
-    axios.get("http://localhost:3000/userData/", { params : { item : item }}).then(response => {
+    axios.get(Helper.getEndpoint("/userData"), { params : { item : item }}).then(response => {
       this.setState({
         data: response.data.data
       });
@@ -131,8 +132,9 @@ export default class NumerUsers extends React.Component {
   }
 
   rendereGraph(data) {
+
     const width = (Dimensions.get("window").width);
-    const height = 720;
+    const height = Dimensions.get("window").height - 100;
 
     return (
       <LineChart
