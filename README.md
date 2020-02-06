@@ -1,6 +1,6 @@
 # QuizApp
 
-LUCA PETRALIA X81/000092
+LUCA PETRALIA
 
 ## Introduction
 University project for LAP 2 (advanced programming laboratory 2).
